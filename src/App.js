@@ -7,6 +7,7 @@ import {useSelector, useDispatch} from "react-redux";
 
 const App = ()=> {
   const appState = useSelector(state=>state.reducer);
+  // new way to use mapstatetoprops
   
     // const fetching = useSelector(state => state.reducer.fetching);
     // const error = useSelector(state => state.reducer.error);
