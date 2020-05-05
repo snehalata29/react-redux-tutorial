@@ -3,7 +3,7 @@ import React,{Component} from 'react';
 import './App.css';
 import { connect } from "react-redux";
 import {useSelector, useDispatch} from "react-redux";
-import {updateDocTypeStepId, appAddDocType} from './action';
+
 
 const App = ()=> {
   const appState = useSelector(state=>state.reducer);
