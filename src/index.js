@@ -9,14 +9,14 @@ import { createStore, applyMiddleware, compose } from "redux";
 import createSagaMiddleware from "redux-saga";
 import { Provider } from "react-redux";
 
-import { configureDataReducer } from "./redux";
+import { reducer } from "./redux";
 import { watcherSaga } from "./sagas";
 
 
 // create the saga middleware
 const sagaMiddleware = createSagaMiddleware();
 let store = createStore(
-  configureDataReducer,
+  reducer,
   applyMiddleware(sagaMiddleware)
 );
 sagaMiddleware.run(watcherSaga);

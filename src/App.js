@@ -1,58 +1,62 @@
-import React from 'react';
+import React, {Component} from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import './App.css';
-//import { connect } from "react-redux";
-import {useSelector, useDispatch} from "react-redux";
+import logo from './logo.svg';
+
+import { connect } from "react-redux";
+import { Button } from 'react-bootstrap';
+
+// import {useSelector, useDispatch} from "react-redux";
 
 
-const App = ()=> {
-  const appState = useSelector(state=>state.reducer);
-  // new way to use mapstatetoprops
-  
-    // const fetching = useSelector(state => state.reducer.fetching);
-    // const error = useSelector(state => state.reducer.error);
-    const dispatch = useDispatch();
-    // console.log(updateDocTypeStepId(2));
-    // console.log(appAddDocType({name: '123'}));
+class App extends Component{
+  // const appState = useSelector(state=>state.reducer);
+  // // new way to use mapstatetoprops
+  //   const dispatch = useDispatch();
+ 
+  render(){
+    const {dog,error,fetching,onRequestDog} = this.props;
     return(
       <div className="App">
         <header className="App-header">
-          <img src={appState.dog || logo} className="App-logo" alt="logo" />
+          <img src={dog || logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Welcome to Saga</h1>
         </header>
 
-        {appState.dog ? (
+        {dog ? (
           <p className="App-intro">Keep clicking for new dogs</p>
         ) : (
           <p className="App-intro">Replace the React icon with a dog!</p>
         )}
 
-        {appState.fetching ? (
-          <button disabled>Fetching...</button>
+        {fetching ? (
+          <Button disabled>Fetching...</Button>
         ) : (
-          <button onClick={()=>dispatch({ type: "API_CALL_REQUEST" })}>Request a Dog</button>
+          <Button onClick={onRequestDog}>Request a Dog</Button>
         )}
 
-        {appState.error && <p style={{ color: "red" }}>Uh oh - something went wrong!</p>}
+        {error && <p style={{ color: "red" }}>Uh oh - something went wrong!</p>}
 
       </div>
     )
   }
+}
+  const mapStateToProps = state => {
+  return {
+    fetching: state.fetching,
+    dog: state.dog,
+    error: state.error
+  };
+};
 
-// const mapStateToProps = state => {
-//   return {
-//     fetching: state.fetching,
-//     dog: state.dog,
-//     error: state.error
-//   };
-// };
+const mapDispatchToProps = dispatch => {
+  return {
+    onRequestDog: () => dispatch({ type: "API_CALL_REQUEST" })
+  };
+};
 
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     onRequestDog: () => dispatch({ type: "API_CALL_REQUEST" })
-//   };
-// };
+export default connect(mapStateToProps, mapDispatchToProps)(App);
 
-// export default connect(mapStateToProps, mapDispatchToProps)(App);
-export default App;
+
 
