@@ -1,0 +1,3 @@
+export const CHANGE_EMAIL = 'CHANGE_EMAIL';
+export const CHANGE_PWD = 'CHANGE_PWD';
+export const CHANGE_AUTH_STATUS = 'CHANGE_AUTH_STATUS';

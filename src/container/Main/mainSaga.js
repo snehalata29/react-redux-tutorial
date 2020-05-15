@@ -20,8 +20,9 @@ function requestnewsData(){
     try{
         let cat = yield select(category)
         selectedcat = cat;
-        let response = yield call(requestnewsData);
-        yield put({ type: FETCH_NEWS_DATA, payload:response.data.articles});
+        // let response = yield call(requestnewsData);
+        // yield put({ type: FETCH_NEWS_DATA, payload:response.data.articles});
+        yield put({ type: FETCH_NEWS_DATA, payload:[]})
     }catch(error){
         yield put({ type: FETCH_NEWS_DATA_ERROR, error})
     }

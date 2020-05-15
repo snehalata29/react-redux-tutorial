@@ -3,3 +3,13 @@
     color:white;
     width:100%;
   }
+  .adminModule{
+    height: 40px;
+    
+    background-color: white;
+
+  }
+  .loginButton{
+    float: right;
+    margin-right: 20px;
+  }

@@ -2,10 +2,11 @@ import React from 'react';
 
 import './Header.css';
 
-import { Nav, Row } from 'react-bootstrap';
+import { Nav, Row,Button } from 'react-bootstrap';
 import { SET_CATEGORY } from './action';
 import {useDispatch} from 'react-redux';
 import { REQUEST_NEWS_DATA } from '../../container/Main/action';
+import { withRouter } from 'react-router';
 
 const Header = (props)=>{
   const dispatch = useDispatch();
@@ -15,11 +16,15 @@ const Header = (props)=>{
     dispatch({type:SET_CATEGORY, payload: cat });
     dispatch({type: REQUEST_NEWS_DATA});
   }
+  const redirectToLogin=()=>{
+    props.history.push('./login');
+  }
 
       return(
         <>
           <Row>
             <header className="newsMainHeader">
+              <div>
               <Nav fill variant="tabs" defaultActiveKey="general">
                 <Nav.Item>
                   <Nav.Link eventKey="general" onClick={()=>requestSelectedCategoryData('general')}>Home</Nav.Link> 
@@ -39,6 +44,10 @@ const Header = (props)=>{
                   <Nav.Link eventKey="Health" onClick={()=>requestSelectedCategoryData('health')}>Health</Nav.Link>
                 </Nav.Item>
               </Nav>
+              </div>
+              <div className="adminModule">
+                <Button className="loginButton" onClick={redirectToLogin}>Login</Button>
+              </div>
             </header>
           </Row>
         
@@ -47,7 +56,7 @@ const Header = (props)=>{
   }
   
 
-export default Header;
+export default withRouter(Header);
 
 
 
