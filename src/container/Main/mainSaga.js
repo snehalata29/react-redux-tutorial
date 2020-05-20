@@ -2,9 +2,10 @@ import axios from 'axios';
 import {NEWS_API_KEY} from '../../config'
 import { takeLatest, call, put, select } from "redux-saga/effects";
 import{FETCH_NEWS_DATA, FETCH_NEWS_DATA_ERROR, REQUEST_NEWS_DATA} from './action';
-import {category} from './selector';
+import {category, code} from './selector';
 
-let selectedcat;
+let selectedCat;
+let selectedCode
 export default function* watcherSaga(){
     yield takeLatest(REQUEST_NEWS_DATA, handleRequest);
 }
@@ -12,17 +13,19 @@ export default function* watcherSaga(){
 function requestnewsData(){
     return axios({
         mathod: 'get',
-        url : `https://newsapi.org/v2/top-headlines?country=in&category=${selectedcat}&apiKey=${NEWS_API_KEY}`
+        url : `https://newsapi.org/v2/top-headlines?country=${selectedCode}&category=${selectedCat}&apiKey=${NEWS_API_KEY}`
     })
 }
 
  function* handleRequest(){
     try{
         let cat = yield select(category)
-        selectedcat = cat;
-        // let response = yield call(requestnewsData);
-        // yield put({ type: FETCH_NEWS_DATA, payload:response.data.articles});
-        yield put({ type: FETCH_NEWS_DATA, payload:[]})
+        let code = yield select(code);
+        selectedCat = cat;
+        selectedCode = code
+        let response = yield call(requestnewsData);
+        yield put({ type: FETCH_NEWS_DATA, payload: response.data.articles});
+         //yield put({ type: FETCH_NEWS_DATA, payload:[]})
     }catch(error){
         yield put({ type: FETCH_NEWS_DATA_ERROR, error})
     }
