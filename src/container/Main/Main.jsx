@@ -4,13 +4,9 @@ import {connect} from 'react-redux';
 import {TopHeadLinePage} from '../../components/TopHeadeLinePage';
 import { REQUEST_NEWS_DATA, test } from './action';
 import { bindActionCreators } from 'redux';
-import { Switch, Route } from 'react-router';
-import {Login} from '../../components/Login';
 
 class Main extends Component{
-    constructor(props){
-        super(props);
-    }
+    
     componentDidMount(){
         this.props.testBindCreators('worked');
         this.props.requestNewsHeadlines();
@@ -22,9 +18,6 @@ class Main extends Component{
             <>
                 <Header></Header>
                 {articles?<TopHeadLinePage articles = {articles}></TopHeadLinePage>: null}
-                <Switch>
-                    <Route path='/login' component={Login} />
-                </Switch>
             </>
         )
     }

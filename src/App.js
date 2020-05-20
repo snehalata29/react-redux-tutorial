@@ -4,6 +4,7 @@ import {BrowserRouter as Router, Route} from 'react-router-dom';
 import './App.css';
 import { Container} from 'react-bootstrap';
 import {Main} from './container/Main';
+import LoginContainer from './container/login/login';
 
 class App extends Component{
   render(){
@@ -11,7 +12,9 @@ class App extends Component{
       <>
         <Router>
           <Container className="container">   
-            <Route path='' component={Main}/>  
+          <Route path='' component={Main}/>
+            <Route path='/articles' component={Main} />
+            <Route path='/login' component={LoginContainer} /> 
           </Container> 
         </Router>
       </>
