@@ -1,4 +1,4 @@
-import React from 'react';
+import React ,{useContext} from 'react';
 
 import './Header.css';
 
@@ -7,6 +7,7 @@ import { SET_CATEGORY } from './action';
 import {useDispatch} from 'react-redux';
 import { REQUEST_NEWS_DATA } from '../../container/Main/action';
 import { withRouter } from 'react-router';
+import {MyContext} from '../../App';
 
 const Header = (props)=>{
   const dispatch = useDispatch();
@@ -19,9 +20,15 @@ const Header = (props)=>{
   const redirectToLogin=()=>{
     props.history.push('./login');
   }
-
+  const context = useContext(MyContext);
       return(
         <>
+        {console.log('access context using other method', context)}
+        <MyContext.Consumer>
+          {value =>( 
+          <>
+            {console.log('access context using consumer',value)}
+
           <Row>
             <header className="newsMainHeader">
               <div>
@@ -50,7 +57,9 @@ const Header = (props)=>{
               </div>
             </header>
           </Row>
-        
+          </>
+          )}
+        </MyContext.Consumer>
       </>
     )
   }

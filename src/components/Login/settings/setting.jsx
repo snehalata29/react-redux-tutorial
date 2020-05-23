@@ -37,8 +37,7 @@ const Settings =(props)=>{
     }
 
     const handleClose =()=> {setShow(false);
-        props.history.goBack();
-        props.history.goBack();
+        props.history.push('/');
     };
 
     return (

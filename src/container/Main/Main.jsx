@@ -5,9 +5,12 @@ import {TopHeadLinePage} from '../../components/TopHeadeLinePage';
 import { REQUEST_NEWS_DATA, test } from './action';
 import { bindActionCreators } from 'redux';
 
+
 class Main extends Component{
-    
+   
+    // static contextType = MyContext;
     componentDidMount(){
+        
         this.props.testBindCreators('worked');
         this.props.requestNewsHeadlines();
     }

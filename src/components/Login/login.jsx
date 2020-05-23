@@ -3,6 +3,8 @@ import { Modal , Button, Form} from 'react-bootstrap';
 import { useReducer } from 'react';
 import { CHANGE_PWD, CHANGE_EMAIL, TOGGLE_VISIBILITY } from './action';
 import { Switch, Route, withRouter } from 'react-router';
+import { useContext } from 'react';
+import { MyContext } from '../../App';
 // import Settings from './setting/setting';
 // import {useDispatch} from 'react-redux';
 
@@ -36,6 +38,7 @@ const Login = (props) => {
       dispatch({type,payload})
     }
 
+    const context = useContext(MyContext)
     const handleSubmit = ()=>{
       if(state.email && state.pwd){
          dispatch({type:TOGGLE_VISIBILITY, payload: false})
@@ -47,7 +50,7 @@ const Login = (props) => {
     }
 
     return (
-      <>
+      <>{console.log('context', context)}
         <Modal show= {state.showModal} onHide={handleClose} centered backdrop="static">
           <Modal.Header closeButton>
             <Modal.Title>Login</Modal.Title>
